@@ -55,7 +55,7 @@ pip install -e ".[vllm]"      # add vLLM for fast reasoning-model generation
 ```bash
 lambda-lattice selftest                                   # mock-oracle recovery check
 lambda-lattice score numbers data/echo_numgame_q8.json    # the number-game verdicts
-lambda-lattice figures                                    # regenerate F1–F10 into figures/
+lambda-lattice figures                                    # regenerate F1–F14 into figures/
 ```
 
 The `selftest` runs the number-game instrument on two *planted* oracles and
@@ -281,11 +281,11 @@ src/lambda_lattice/
   boolean/reasoning.py  the reasoning-model (generation) variant
   numbers/harness.py    the Tenenbaum number-game port (+ no-GPU mock backend)
   scoring/              importable scorers: jbias, gcm, sizep, numbers
-  figures/              the F1–F10 figure pipeline
+  figures/              the F1–F14 figure pipeline
   cli.py                lambda-lattice run-boolean | run-numbers | score | figures | selftest
 preregistrations/       the three verbatim pre-registration ledgers + how to verify
 data/                   every raw per-probe result JSON reported anywhere
-figures/                F1–F10 (300 dpi PNG; regenerable)
+figures/                F1–F14 (300 dpi PNG; regenerable)
 paper/                  the article lands here
 tests/                  reference-learner unit tests + the mock-oracle credibility test
 ```

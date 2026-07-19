@@ -3,7 +3,7 @@
     lambda-lattice run-boolean   [--models ... --seeds N ...]
     lambda-lattice run-numbers   [--models ... --backend mock ...]
     lambda-lattice score KIND    FILE [FILE ...]          (KIND: jbias|gcm|sizep|numbers)
-    lambda-lattice figures                                (regenerate F1-F10)
+    lambda-lattice figures                                (regenerate F1-F14)
     lambda-lattice selftest                               (mock-oracle recovery, no GPU)
 """
 from __future__ import annotations
@@ -122,7 +122,7 @@ def main(argv=None):
     ps.add_argument("kind", nargs="?", help="jbias|gcm|sizep|numbers")
     ps.add_argument("files", nargs="*", help="result JSON paths")
 
-    sub.add_parser("figures", help="regenerate F1-F10 into figures/")
+    sub.add_parser("figures", help="regenerate F1-F14 into figures/")
 
     pt = sub.add_parser("selftest", help="mock-oracle recovery check (no GPU)")
     pt.add_argument("--seeds", type=int, default=36)

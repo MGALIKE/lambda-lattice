@@ -863,7 +863,7 @@ def main():
     n_mono, n_total, cells, mono_flags = f3 if f3 else (0, 0, [], [])
     _try(fig_f4)
     _try(fig_f5)
-    _try(fig_f6)   # needs jlever_7b.json (lever wave; not in the released data)
+    _try(fig_f6)   # needs jlever_7b.json (now shipped in data/)
     _try(fig_f7)
     _try(fig_f8)
     _try(fig_f9)

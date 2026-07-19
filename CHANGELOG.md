@@ -21,8 +21,11 @@ Initial standalone open-source release, packaged from the pre-registered
 - Tenenbaum number-game instrument (`numbers/harness.py`) with the no-GPU
   mock-oracle power check.
 - Importable scorers (`scoring/`): `jbias`, `gcm`, `sizep`, `numbers`.
-- Figure pipeline (`figures/`) regenerating F1–F10.
-- Verbatim pre-registration ledgers, all raw result JSONs, and the F1–F10 PNGs.
+- Figure pipeline (`figures/`) regenerating F1–F14 — the reasoning +
+  number-game extension figures (F11 domain boundary, F12 boundary map,
+  F13 talk-vs-do faithfulness, F14 elicitation ladder) now build from the
+  shipped `data/` JSONs alongside F1–F10 with one `lambda-lattice figures`.
+- Verbatim pre-registration ledgers, all raw result JSONs, and the F1–F14 PNGs.
 - Test suite: reference-learner unit tests, the mock-oracle credibility test,
   and CLI smoke tests. CI on Python 3.10–3.12.
 
