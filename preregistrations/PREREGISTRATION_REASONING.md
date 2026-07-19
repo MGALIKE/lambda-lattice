@@ -336,8 +336,6 @@ operation is elicitable (B); the size-principle statistic is elicitable when
 stated (D+D′ pooled); the spontaneous policy of using either is absent at
 every level tested (K-R, K4).**
 
-### policy vs capacity — instructed version-space discipline in thinking mode
-
 The K-R verdict shows reasoning models do not spontaneously contract. Follow-up
 question: policy or capacity? New condition C7: Qwen3-8B thinking ON, identical
 stimuli/arms/seeds, with the probe instruction replaced by explicit version-space
@@ -390,3 +388,71 @@ max_new_tokens=6144 and max_model_len=8192 for ALL thinking conditions; rerun
 C1 (Qwen3-8B:on) and C3 (R1-Distill) into *_v2.json files; v1 files kept. The
 non-thinking conditions (C2, C4: parse 1.00) stand. Predictions and kill criteria
 unchanged.
+
+---
+
+## AMENDMENT E (2026-07-19, committed BEFORE the rerun it governs):
+## gpt-oss-20b escalated-budget toggle rerun (breaking the Qwen monoculture)
+
+Status: FROZEN at commit time. No gpt-oss data at any budget above 6144 exist.
+Motivation: C5 (gpt-oss-20b, reasoning effort high) was EXCLUDED by the frozen
+parse gate (45% truncation at max_new_tokens=6144). Amendment-A precedent:
+Qwen3-8B's 55% truncation at 2048 was cured by budget escalation, so the C5
+exclusion is plausibly a budget artifact, and the K-R toggle null currently
+rests on one model family (Qwen3 8B/14B/32B + R1-distill). Declared as the
+planned next step in the release README before this amendment.
+
+**Design:** openai/gpt-oss-20b, reasoning effort **high vs low** (the
+same-weights toggle analog for the harmony template; `low` is the minimal-
+deliberation arm), fmt f1, arms a+b, 36 seeds (0-35), max_new_tokens=14336,
+max_len=16384, temp 0.6 / top_p 0.95 — identical to the Amendment-A budget.
+All frozen gates unchanged: trial sanity >= 0.75, condition parse >= 0.8,
+> 20% truncation → condition EXCLUDED again (reported; NO further escalation
+— a second budget failure is a result, not a retry).
+
+**Hypotheses & criteria (mirror K-R, frozen):**
+- H-E1 restoration: λ̄(high) − λ̄(low) ≤ −0.10 with z ≥ 3 AND arm-B slope
+  λ(32)−λ(4) ≤ −0.10 with z ≥ 3 in the high condition → restoration; would
+  make the Qwen toggle null family-SPECIFIC (headline-changing).
+- K-E null: |slope| < 0.05 (or z < 2) in high AND |λ̄(high)−λ̄(low)| < 0.05
+  with graded monotone profile → the toggle null EXTENDS to a second family
+  (joins the K-R ledger as a cross-family cell, same status as the 14B/32B
+  single-sample null cells).
+- Partial: report as such, no spin. Rule-commitment discriminator (>50%
+  rule-committed trials) reported as in the original prereg.
+- Any POSITIVE (restoration) verdict requires a fresh-seed replication
+  (seeds 36-71) before claim (two-sample rule); a null cell joins the
+  many-cell null ledger directly, consistent with prior practice.
+
+**Launch:** `ETH_SEED0=0 modal run --detach modal_app.py::jthink_multi
+--seeds 36 --jobs-spec
+"openai/gpt-oss-20b:high,openai/gpt-oss-20b:low|14336|echo_think_gptoss_e.json|f1|"`
+
+### AMENDMENT E OUTCOME (2026-07-19, scored after run; prereg 80872d8)
+
+**Verdict: the high-effort cell is EXCLUDED AGAIN at max_new_tokens=14336
+(parse 0.74; 26% truncation, gate is 20%) — per the frozen rule this is a
+result, not a retry; no further escalation. K-E/H-E1 cannot be evaluated:
+gpt-oss-20b's high-effort deliberation does not fit under this instrument's
+budget gates (mean think length 11.4k chars vs Qwen3-8B's 9.1k at the same
+budget where parse was 0.96).**
+
+Descriptives (no claims):
+- **low effort (ALL gates pass**: learned 174/180, sanity 0.97, parse 1.00):
+  λ̄ = 0.507 ± 0.027, profile 0.43/0.49/0.61 (monotone graded, shallower than
+  j/k), arm-B slope λ(32)−λ(4) = +0.000 ± 0.061 (z = 0.00, 32 seeds) — flat;
+  rule-committed 0%. A frontier open reasoner at minimal effort lands on the
+  flat evidence-quantity-insensitive default (descriptive 6th family cell).
+- **high effort (excluded, survivor-biased**: 54/180 learned): among
+  surviving trials the pre-registered rule-commitment discriminator fires for
+  the FIRST time in any model — **86% rule-committed** (baseline 9–21%;
+  aggregate profile 0.19/0.45/0.77 stays graded exactly via the
+  random-rule-choice mechanism the prereg anticipated). Reported as
+  descriptive only: the cell fails the parse gate and survivors are the
+  trials where deliberation terminated.
+- Companion F-X numgame cell (NG-F prereg): also EXCLUDED (parse 0.499);
+  its 39 surviving trials are perfectly rule-like (Δfit +0.561, λ_in = 1.000,
+  λ_off = λ_broad = 0.000) — consistent with the high-effort Boolean
+  descriptive: gpt-oss-20b, when it terminates, commits to discrete rules in
+  BOTH domains. The toggle-null question for non-Qwen reasoners remains open;
+  candidate follow-ups: GLM/EXAONE/Phi-4-reasoning-class togglable models.

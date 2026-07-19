@@ -266,3 +266,114 @@ Hypothesis-space induction in LLMs is DOMAIN-GATED, not absent and not
 reasoning-training-dependent. Reconciles 2512.20162 (rule-like numbers) with
 our Boolean program; tension with 2504.09387's zero-shot null (our no-think
 condition contracts at z=−8.8) noted for the paper.
+
+---
+
+## AMENDMENT NG-F (2026-07-19, committed BEFORE any cross-family run):
+## cross-family + frontier sweep of the number-game instrument
+
+Status: FROZEN at commit time. No non-Qwen number-game model data exist.
+Motivation: the CLAIMED domain-boundary result (RULE+PRESENT, two samples) is
+single-family (Qwen3-8B). The Boolean side of the boundary is established
+across 5 families; the number side must be too, or the claim degrades to
+"Qwen3 is domain-gated". This was pre-declared as the natural next step in
+both the README and the replication outcome above.
+
+**Models (exact Boolean-program roster, ungated mirrors, mode `:off` = plain
+chat template; the `enable_thinking` kwarg is inert in non-Qwen templates):**
+
+| cell | model | maxnew |
+|---|---|---|
+| F-L | unsloth/Meta-Llama-3.1-8B-Instruct:off | 3072 |
+| F-M | mistralai/Mistral-7B-Instruct-v0.3:off | 3072 |
+| F-G | unsloth/gemma-2-9b-it:off | 3072 |
+| F-O | allenai/OLMo-2-1124-13B-Instruct:off | 3072 |
+| F-X (frontier reasoner) | openai/gpt-oss-20b:high | 14336 |
+
+Everything else IDENTICAL to the primary condition: fmt ng1, arms a+b,
+36 seeds (sample 1 = seeds 0-35), INSTRUCT="", temp 0.6 / top_p 0.95,
+gates unchanged (trial sanity >= 0.75, parse >= 0.8, exclusion bar 24/36
+arm-a; a family failing gates is EXCLUDED and reported — gpt-oss C5
+precedent). Scorer: `ng_analyze.py` UNCHANGED (frozen 79dc18e), H-NG1/H-NG2
+thresholds unchanged.
+
+**Decision rules (frozen):**
+- Per-family verdicts from the unchanged H-NG1 (Δfit ≥ +0.10, z ≥ 2 →
+  RULE-like; ≤ −0.10, z ≥ 2 → SIMILARITY-like) and H-NG2 (slope ≤ −0.10,
+  z ≥ 2 → PRESENT; ≥ −0.05 with se ≤ 0.05 → ABSENT power-gated).
+- **Family-universality is CLAIMED iff ≥ 3 of the 4 non-frontier families
+  land RULE-like AND PRESENT in sample 1, and every family entering the
+  claim replicates both verdicts on fresh seeds 36-71 (two-sample rule;
+  replication launched only for families with a sample-1 verdict).**
+- Any family landing SIMILARITY-like or ABSENT (and replicating) is a
+  **boundary-refinement result** — the domain gate is family-dependent —
+  reported per-cell with equal prominence. Mixed/intermediate cells:
+  descriptive report, no claim.
+- F-X (gpt-oss-20b) is a frontier bonus cell, NOT part of the universality
+  count; scored with the same rules; its parse gate outcome is reported
+  either way (its Boolean-instrument exclusion at 6144 is on record).
+- No threshold changes, no post-hoc strata, no model swaps after first data.
+
+**Launch (one detached app, jobs sequential on one A100-80GB):**
+`ETH_SEED0=0 modal run --detach modal_app.py::jthink_multi --seeds 36
+--jobs-spec "unsloth/Meta-Llama-3.1-8B-Instruct:off|3072|echo_numgame_llama.json|ng1|;mistralai/Mistral-7B-Instruct-v0.3:off|3072|echo_numgame_mistral.json|ng1|;unsloth/gemma-2-9b-it:off|3072|echo_numgame_gemma.json|ng1|;allenai/OLMo-2-1124-13B-Instruct:off|3072|echo_numgame_olmo.json|ng1|;openai/gpt-oss-20b:high|14336|echo_numgame_gptoss.json|ng1|"`
+Replication pass mirrors with ETH_SEED0=36 and `_rep` filenames.
+
+**NG-F infra deviation (2026-07-19, before any NG-F data seen):** the F-O job
+(OLMo-2-1124-13B-Instruct) crashed at engine init — the model's
+max_position_embeddings is 4096, below the launcher-derived max_len
+5120 (= maxnew 3072 + 2048). Relaunched with maxnew 2048 → max_len 4096
+(prompts are ≤ ~700 tokens; non-thinking answers are single words, so no
+truncation risk). No other change; no NG-F results existed at this edit.
+
+## NG-F OUTCOME (2026-07-19, scored after both samples; prereg 80872d8, scorer
+## unchanged 79dc18e; Mistral S1 rerun after container preemption destroyed the
+## first run's output pre-persist — no data from the lost run were ever seen)
+
+Two independent 36-seed samples per family (S1 seeds 0-35, S2 seeds 36-71).
+All gates passed everywhere (parse 0.956-1.000; arm-a pass 25-36/36, bar 24).
+
+| family | Δfit S1 / S2 | H-NG1 | slope S1 / S2 | in_far slope S1 / S2 | H-NG2 |
+|---|---|---|---|---|---|
+| Llama-3.1-8B | +0.300 (z=10.05) / +0.347 (z=10.66) | **RULE-like ×2** | −0.167 (z=−1.51) / −0.208 (z=−1.74) | +0.000 / −0.188 | intermediate ×2 |
+| Gemma-2-9B | +0.345 (z=10.68) / +0.394 (z=16.21) | **RULE-like ×2** | −0.500 (z=−9.43) / −0.450 (z=−7.60) | −0.607 / −0.550 | **PRESENT ×2** |
+| OLMo-2-13B | +0.034 (z=1.26) / +0.035 (z=1.43) | MIXED ×2 | −0.750 (z=−7.35) / −0.583 (z=−5.53) | −0.625 / −0.583 | **PRESENT ×2** |
+| Mistral-7B-v0.3 | −0.089 (z=−3.35) / −0.026 (z=−0.78) | MIXED ×2 (proximity-ordered strata ×2) | +0.140 (z=+2.58) / +0.183 (z=+2.98) | +0.000 / +0.038 | intermediate ×2 (EXPANSION, descriptive) |
+| (Qwen3-8B, claimed above) | +0.56-0.59 / +0.55-0.57 | RULE-like ×4 cells | −0.40…−0.56 | **+0.06…+0.18 (positive ×4)** | PRESENT ×4 cells |
+
+**Frozen decision: family-universality NOT claimed** — only Gemma joins Qwen
+at RULE+PRESENT (2 families; bar was ≥3 of the 4 non-frontier families plus
+replication). The pre-registered alternative branch applies: **the domain
+gate is FAMILY-DEPENDENT**, and the per-cell results are claimed under the
+two-sample rule as boundary refinements:
+- **Gemma-2-9B: RULE + CONTRACTION claimed** (both verdicts, both samples).
+- **Llama-3.1-8B: RULE-like positioning claimed** (both samples); contraction
+  unresolved (intermediate ×2 — point estimates negative, SEs too large; the
+  power-gated ABSENT criterion never fired).
+- **OLMo-2-13B: contraction-without-rule-positioning claimed** (MIXED ×2 +
+  PRESENT ×2); its in_far slopes (−0.63/−0.58) show GLOBAL tightening toward
+  the demo set, not Bayes-selective narrowing.
+- **Mistral-7B: no verdict either axis** (frozen rules); descriptively
+  proximity-leaning with replicated EXPANSION (+0.14 z=2.6 / +0.18 z=3.0) —
+  the closest number-game analog of the Boolean similarity default.
+
+**Selectivity note (descriptive, not verdict-bearing):** only Qwen3-8B shows
+the full Bayes signature — off/broad acceptance collapsing while in_far
+acceptance RISES (in_far slopes positive in all 4 cells). Gemma's contraction
+carries a tightening component (in_far also falls). So "size-principle
+contraction at near-reference magnitude with rising in-rule confidence" is,
+so far, Qwen-specific; Gemma approximates it; OLMo tightens globally;
+Llama freezes; Mistral expands.
+
+**Exploratory synthesis (post-hoc framing, flagged as such):** the same five
+families that are HOMOGENEOUS on Boolean attribute concepts (31/31 cells on
+one graded default) are HETEROGENEOUS on number concepts — five distinct,
+individually replicated inductive profiles. The similarity default is
+family-universal; hypothesis-space induction on numbers is family-
+idiosyncratic. This inverts the usual expectation that "capabilities differ,
+biases converge" and is the sweep's sharpest sentence for the paper — clearly
+labeled exploratory since the homogeneity/heterogeneity contrast was not a
+pre-registered hypothesis.
+
+F-X (gpt-oss-20b numgame) still running at this edit; scored in a later
+section when it lands.

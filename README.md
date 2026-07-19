@@ -137,7 +137,11 @@ thinking toggle as a **same-weights causal switch** — yields a pre-registered
 1. **No spontaneous hypothesis-space management.** The thinking toggle is null
    at 8B/14B/32B (think−no-think d = +0.050 / +0.039 / −0.036, all |z| < 1.4);
    profiles stay graded; and in **60/60** sampled reasoning traces there is no
-   elimination language — **deliberation narrates similarity**.
+   elimination language — **deliberation narrates similarity**. (gpt-oss-20b
+   was excluded by the pre-registered parse gate at both a 6144- and a
+   14336-token budget — see the Amendment E section below — so the toggle
+   null is Qwen-family-only; its passing low-effort cell is flat and
+   evidence-insensitive like every other measured cell.)
 2. **The intersection *operation* is elicitable.** One-pass version-space
    instruction inside RL-trained deliberation collapses λ̄ **0.699 → 0.211**
    with calibration intact — controllability, not a changed inductive bias.
@@ -203,26 +207,68 @@ slope SE ≈ 0.047 at 36 seeds). That check is `lambda-lattice selftest`.
 
 ---
 
-## Planned / queued (pre-registered next steps)
+## The cross-family sweep: one default, five inductive identities
 
-### Cross-family number-game sweep
+The pre-registered cross-family sweep (Amendment NG-F, frozen before any
+run; two independent 36-seed samples per family, identical instrument and
+scorer) asked whether the number-game result is family-universal. The frozen
+universality bar (≥ 3 of 4 families RULE-like *and* contraction-PRESENT)
+was **not met — and the failure is the finding.** Every family reproduces
+its own distinct profile across both samples:
 
-The domain-boundary result is single-family (Qwen3-8B) so far. Running the
-number-game instrument across the other Boolean-program families tests whether
-the domain-gating is as family-universal as the similarity default.
+| family (:off) | Δfit S1 / S2 | slope λ(32)−λ(1) S1 / S2 | in-rule-far slope | replicated profile |
+|---|---|---|---|---|
+| Qwen3-8B (above) | +0.561 / +0.552 | −0.461 / −0.396 (z −9.6 / −8.8) | **positive** (+0.06…+0.18) | **Bayes rule induction** (off-rule dies, in-rule rises) |
+| Gemma-2-9B | +0.345 / +0.394 (z 10.7 / 16.2) | −0.500 / −0.450 (z −9.4 / −7.6) | −0.61 / −0.55 | rule + contraction, with a global-tightening component |
+| Llama-3.1-8B | +0.300 / +0.347 (z 10.1 / 10.7) | −0.167 / −0.208 (ns ×2) | ≈ 0 | **rule selection, frozen evidence** (no resolvable dynamics) |
+| OLMo-2-13B | +0.034 / +0.035 (ns ×2) | −0.750 / −0.583 (z −7.4 / −5.5) | −0.63 / −0.58 | **tightening without rules** (everything collapses toward the demos) |
+| Mistral-7B-v0.3 | −0.089 / −0.026 | **+0.140 / +0.183** (z +2.6 / +3.0) | ≈ 0 | **similarity + expansion** (proximity-ordered strata, λ grows with n) |
 
-<!-- Results land here when the sweep completes. -->
-{{CROSS_FAMILY_RESULTS}}
+Only Qwen3-8B shows the full Bayesian signature — off-rule acceptance
+collapsing *while in-rule-far acceptance rises*. Gemma reproduces the two
+headline verdicts (rule positioning + contraction) but with in-rule
+acceptance also falling at large n; the others each do something different,
+and each does it twice.
 
-### Non-Qwen reasoner replication (gpt-oss)
+The exploratory synthesis (flagged as post-hoc — this contrast was not a
+pre-registered hypothesis): the same five families that are **homogeneous on
+Boolean concepts** (31/31 cells on one graded default) are **heterogeneous
+on number concepts** (five distinct, individually replicated profiles).
+The similarity default is family-universal; hypothesis-space induction is
+family-idiosyncratic. Domain-gating is real, but what sits behind the gate
+depends on the model — which sharpens the reconciliation reading: rule-like
+number-game results (2512.20162) and graded-similarity results are both
+right, *and which one you get depends on both the domain and the family*.
 
-gpt-oss-20b was excluded by the pre-registered parse gate (45% truncation at a
-6144-token budget) and is reported as such. A rerun at an escalated token budget
-(precedent: Amendment A) would break the Qwen-family monoculture of the toggle
-result.
+![Boundary map](figures/F12_boundary_map.png)
 
-<!-- Results land here when the gpt-oss rerun completes. -->
-{{GPTOSS_RESULTS}}
+## The gpt-oss-20b cells (Amendment E: the exclusion is the result)
+
+The pre-registered escalated-budget rerun (Amendment E, frozen before the
+run) attempted to break the Qwen-family monoculture of the toggle result:
+gpt-oss-20b at reasoning effort high vs low, max_new_tokens 14336 (the
+budget that cured Qwen3-8B's truncation). Outcome, per the frozen
+no-second-escalation rule:
+
+- **High effort fails the parse gate again** (parse 0.74; 26% truncation;
+  mean deliberation 11.4k chars) — the toggle contrast is unevaluable, and
+  the toggle-null question for non-Qwen reasoners remains open (candidates:
+  GLM/EXAONE/Phi-4-reasoning-class togglable models).
+- **Low effort passes every gate** (parse 1.00, 174/180 learned): λ̄ = 0.507,
+  profile 0.43/0.49/0.61, λ(n) slope +0.000 (z = 0.00, 32 seeds), 0%
+  rule-committed trials — a frontier open-weights reasoner at minimal effort
+  lands on the same flat, evidence-quantity-insensitive default (descriptive
+  cell; the pre-registered contrast needed both conditions).
+- **Descriptive, survivor-biased, reported without claim:** among the high
+  condition's surviving trials, the pre-registered rule-commitment
+  discriminator fires for the first time in any model — **86% of trials are
+  rule-committed** (baseline 9–21%), with the aggregate profile staying
+  graded exactly via the random-rule-choice mechanism the prereg
+  anticipated. The companion number-game cell (also excluded, parse 0.499)
+  is consistent: its survivors are perfectly rule-like (λ_in = 1.000,
+  λ_off = λ_broad = 0.000). When gpt-oss-20b's deliberation terminates, it
+  commits to discrete rules in both domains — but the cells fail the frozen
+  gates, so this is reported descriptively only.
 
 ---
 
