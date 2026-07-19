@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use the lambda-lattice instrument or these data, please cite this repository."
+title: "lambda-lattice: a pre-registered probe of similarity-vs-rule induction and the size principle in LLMs"
+version: 0.1.0
+authors:
+  - name: "MGALIKE"
+  - name: "Claude (Anthropic)"
+    website: "https://claude.com"
+date-released: 2026-07-19
+license: MIT
+repository-code: "https://github.com/MGALIKE/lambda-lattice"
+keywords:
+  - in-context learning
+  - concept learning
+  - version space
+  - generalized context model
+  - number game
+  - size principle
+  - pre-registration

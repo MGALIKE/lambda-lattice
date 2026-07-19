@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lambda-lattice"
+version = "0.1.0"
+description = "A pre-registered instrument that measures where a language model sits between similarity-based and rule-based induction, and whether it applies the Bayesian size principle."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "MGALIKE" },
+    { name = "Claude (Anthropic)" },
+]
+keywords = [
+    "in-context learning",
+    "concept learning",
+    "version space",
+    "generalized context model",
+    "number game",
+    "size principle",
+    "pre-registration",
+    "chain-of-thought faithfulness",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+models = ["torch", "transformers"]
+vllm = ["vllm"]
+dev = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/MGALIKE/lambda-lattice"
+Source = "https://github.com/MGALIKE/lambda-lattice"
+
+[project.scripts]
+lambda-lattice = "lambda_lattice.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: end-to-end runs that may take longer than a second",
+    "gpu: requires torch + a model (skipped in CI)",
+]
