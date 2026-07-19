@@ -5,6 +5,9 @@ The full research article for the λ-lattice study.
 - **`paper.md`** — the complete write-up (GitHub-flavored markdown, ~8.7k words):
   abstract, 10 sections, all tables and figures. This is the publication
   deliverable (TMLR-target quality).
+- **`paper.pdf`** — a rendered copy of `paper.md` (A4, 21 pages, figures
+  embedded). The markdown file is the source of truth; the PDF is a
+  convenience export.
 
 ## What the paper is
 
