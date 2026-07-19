@@ -2,6 +2,8 @@
 
 *A pre-registered instrument for locating where a language model sits between similarity-based and rule-based in-context induction — and whether it applies the Bayesian size principle.*
 
+*λ-lattice is an instrument of the **Echo Space** research program, which studies lattice and closure structure — meets, joins, and version spaces — in learned representations.*
+
 ---
 
 ## Abstract

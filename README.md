@@ -4,6 +4,9 @@
 between similarity-based and rule-based induction — and whether it applies the
 Bayesian size principle.**
 
+*An instrument of the **Echo Space** research program — studying lattice and
+closure structure (meets, joins, version spaces) in learned representations.*
+
 [![CI](https://github.com/MGALIKE/lambda-lattice/actions/workflows/ci.yml/badge.svg)](https://github.com/MGALIKE/lambda-lattice/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10–3.12](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/)
