@@ -5,7 +5,7 @@ version: 0.1.0
 authors:
   - name: "MGALIKE"
   - name: "Claude (Anthropic)"
-    website: "https://claude.com"
+    website: "https://mustafagalipayhan.com"
 date-released: 2026-07-19
 license: MIT
 repository-code: "https://github.com/MGALIKE/lambda-lattice"
